@@ -24,10 +24,21 @@ public class CategoryController {
 //        this.categoryService = categoryService;
 //    }
 
+// --> Learning purposes
+//    @GetMapping("/echo")
+//    public ResponseEntity<String> echoMessage(@RequestParam(name = "message", required = false) String message){
+//        return new ResponseEntity<>("Echoed message " + message,HttpStatus.OK);
+//    }
+
+
+
     @GetMapping("/public/categories")
     //@RequestMapping(value = "/public/categories", method = RequestMethod.GET)
-    private ResponseEntity<CategoryResponse> getAllCategories(){
-        CategoryResponse categories = categoryService.getAllCategories();
+    private ResponseEntity<CategoryResponse> getAllCategories(
+            @RequestParam(name="pageNumber") Integer pageNumber,
+            @RequestParam(name="pageSize") Integer pageSize
+    ){
+        CategoryResponse categories = categoryService.getAllCategories(pageNumber,pageSize);
         return new ResponseEntity<>(categories,HttpStatus.OK);
     }
 
